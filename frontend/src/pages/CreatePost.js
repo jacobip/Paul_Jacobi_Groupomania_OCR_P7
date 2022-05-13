@@ -20,11 +20,11 @@ function CreatePost() {
 	}, [navigate]);
 
 	const validationSchema = Yup.object().shape({
-		title: Yup.string().min(1).max(33).required('Veuillez rensigner le titre'),
+		title: Yup.string().min(1).max(33).required('Veuillez renseigner le titre'),
 		postText: Yup.string()
 			.min(1)
 			.max(150)
-			.required('Veuillez renseigner la publicatiion'),
+			.required('Veuillez renseigner le texte de la publicatiion'),
 	});
 
 	const onSubmit = (data) => {
@@ -61,41 +61,43 @@ function CreatePost() {
 					action="/postimg"
 					encType="multipart/form-data"
 				>
-					<label>title</label>
-					<ErrorMessage name="title" component="span" />
-					<Field
-						type="text"
-						autoComplete="off"
-						className="inputCreatePost "
-						name="title"
-						placeholder="Titre du massage."
-					/>
-					<label>post</label>
-					<ErrorMessage name="postText" component="span" />
-					<Field
-						as="textarea"
-						autoComplete="off"
-						className="inputCreatePost textAreaPost"
-						placeholder="Écrivez votre message ..."
-						name="postText"
-						id=""
-						cols="30"
-						rows="15"
-					></Field>
-					<div>
-						<label htmlFor="file">Envoyez une image</label>
-						<input
-							id="file"
-							className="btn"
-							type="file"
-							name="image"
-							size="lg"
-							onChange={(e) => setImage(e.target.files[0])}
+					<p>Créer une publication</p>
+					<div className="createPost">
+						<ErrorMessage name="title" component="span" />
+						<Field
+							type="text"
+							autoComplete="off"
+							className="inputCreatePost"
+							name="title"
+							placeholder="Titre de la publication"
 						/>
-						<button className="btn" type="submit">
-							Envoyez
-						</button>
+
+						<ErrorMessage name="postText" component="span" />
+						<Field
+							as="textarea"
+							autoComplete="off"
+							className="inputCreatePost textAreaPost"
+							placeholder="Texte de la publication"
+							name="postText"
+							id=""
+							cols="30"
+							rows="9"
+						></Field>
+						<div className="sendImg">
+							<label htmlFor="file">Publier une image</label>
+							<input
+								id="file"
+								className="btnImg"
+								type="file"
+								name="image"
+								size="lg"
+								onChange={(e) => setImage(e.target.files[0])}
+							/>
+						</div>
 					</div>
+					<button className="btnCreatePost" type="submit">
+						Publier
+					</button>
 				</Form>
 			</Formik>
 		</div>

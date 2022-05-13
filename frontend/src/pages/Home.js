@@ -68,11 +68,14 @@ function Home() {
 
 	return (
 		<div className="listofposts">
+			<div className="intro">
+				<p>Les dernières publications du réseau social Groupomania</p>
+			</div>
 			{listOfPosts.map((value, key) => {
 				return (
 					<div key={key} className="post">
 						<div className="title">
-							<Link to={`/profile/${value.UserId}`}>Publié par : {value.username} </Link>
+							<Link to={`/profile/${value.UserId}`}>Publié par {value.username} </Link>
 							{value.title}
 						</div>
 						<div

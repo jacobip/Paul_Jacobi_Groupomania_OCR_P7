@@ -14,7 +14,6 @@ function Profile() {
 	const [profileRole, setProfileRole] = useState('visitor');
 
 	const adminRole = authState.role === 'admin';
-	// console.log(adminRole);
 
 	useEffect(() => {
 		axios.get(`http://localhost:3001/auth/basicinfo/${id}`).then((response) => {
@@ -41,7 +40,6 @@ function Profile() {
 	return (
 		<div className="profilePageContainer">
 			<div className="basicInfo">
-				{' '}
 				<h1 className="accountInfoTitle">Profil</h1>
 				<h5>Utilsateur : {username}</h5>
 				<h5>Role : {profileRole}</h5>
@@ -80,14 +78,6 @@ function Profile() {
 								}}
 							>
 								<div>
-									{/* {value.image !== null && (
-                  <img
-                    className="thumbnail"
-                    src={`http://localhost:3001/${value.image}`}
-                    alt="img from a post"
-                  />
-                )} */}
-
 									{value.image ? (
 										<img
 											className="thumbnail"

@@ -83,12 +83,7 @@ function App() {
 							)}
 						</div>
 						<div className="middle">
-							<div>
-								<h2>Bienvenue sur le réseau social interne</h2>
-							</div>
-							<div>
-								<img src={logo} alt="Logo" />
-							</div>
+							<img src={logo} alt="Logo" />
 						</div>
 						<div className="loggedInContainer">
 							<Link to={`/profile/${authState.id}`}> {authState.username} </Link>

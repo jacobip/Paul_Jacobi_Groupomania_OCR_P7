@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../helpers/AuthContext';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
 const initialValues = {
@@ -99,7 +99,7 @@ function Post() {
 			validationSchema={validationSchema}
 		>
 			<div className="postPage">
-				<div className="leftSide">
+				<div className="upSide">
 					<div className="post postComment" id="individual">
 						<div className="title">{postObject.title}</div>
 
@@ -111,7 +111,6 @@ function Post() {
 								}
 							}}
 						>
-							{' '}
 							<div>
 								{postObject.image !== null && (
 									<img
@@ -122,9 +121,33 @@ function Post() {
 								)}
 								<p> {postObject.postText}</p>
 							</div>
+							<div className="listOfComments">
+								<p className="commentTitle">Commentaires</p>
+								{comments.map((comment, key) => {
+									return (
+										<div key={key} className="comment">
+											<label>{comment.username} a commenté</label>
+											<p>{comment.commentBody}</p>
+
+											{authState.username === comment.username || adminRole === true ? (
+												<button
+													className="deleteBtn"
+													onClick={() => {
+														deleteComment(comment.id);
+													}}
+												>
+													Supprimer mon commentaire
+												</button>
+											) : (
+												''
+											)}
+										</div>
+									);
+								})}
+							</div>
 						</div>
 						<div className="footer">
-							from {postObject.username}
+							{postObject.username}
 							{authState.username === postObject.username || adminRole === true ? (
 								<button
 									className="smallBtn"
@@ -132,8 +155,7 @@ function Post() {
 										deletePost(postObject.id);
 									}}
 								>
-									{' '}
-									Supprimez le message
+									Supprimer mon message
 								</button>
 							) : (
 								''
@@ -141,50 +163,27 @@ function Post() {
 						</div>
 					</div>
 				</div>
-				<div className="rightSide">
-					<Form className="addCommentContainer">
-						<Field
-							as="textarea"
-							name="comment"
-							type="text"
-							placeholder="Commentez ce message..."
-							autoComplete="off"
-							cols="30"
-							rows="3"
-							value={newComment.commentText}
-							onChange={(event) => {
-								setNewComment({ commentText: event.target.value, id: null });
-							}}
-						/>
+				<div className="downSide">
+					<div className="commentForm">
+						<Form className="addCommentContainer">
+							<Field
+								className="commentField"
+								as="textarea"
+								name="comment"
+								type="text"
+								placeholder="Commentez ce message..."
+								autoComplete="off"
+								cols="50"
+								rows="6"
+								value={newComment.commentText}
+								onChange={(event) => {
+									setNewComment({ commentText: event.target.value, id: null });
+								}}
+							/>
+						</Form>
 						<button type="submit" onClick={addComment}>
-							Envoyez votre commentaire
+							Commentez
 						</button>
-					</Form>
-					<div className="listOfComments">
-						<ErrorMessage className="easyComment" name="comment" component="span" />
-						{comments.map((comment, key) => {
-							return (
-								<div key={key} className="comment">
-									<p>{comment.commentBody}</p>
-
-									<label>
-										Commentaires<strong>{comment.username}</strong> commented on your post
-									</label>
-									{authState.username === comment.username || adminRole === true ? (
-										<button
-											className="smallBtn"
-											onClick={() => {
-												deleteComment(comment.id);
-											}}
-										>
-											Poubelle
-										</button>
-									) : (
-										''
-									)}
-								</div>
-							);
-						})}
 					</div>
 				</div>
 			</div>

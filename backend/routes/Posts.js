@@ -15,6 +15,6 @@ router.put('/:id', validateToken, upload, postsCtrl.modifyPosts);
 
 router.post('/', validateToken, upload, postsCtrl.createPosts);
 
-router.delete('/:postId', validateToken);
+router.delete('/:postId', validateToken, postsCtrl.deletePosts);
 
 module.exports = router;

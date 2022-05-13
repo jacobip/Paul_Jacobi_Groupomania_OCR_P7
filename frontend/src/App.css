@@ -16,16 +16,18 @@ Couleurs Groupomania
 }
 
 body {
+  font-family: 'Montserrat';
   margin: 0;
   padding: 0;
   background-color: #dcdcdc;
 }
 
 .downBar {
+  position:-webkit-sticky; 
+  position:sticky; bottom:0;
   width: 100%;
-  height: 70px;
+  height: 60px;
   background-color: #091f43;
-  
   display: flex;
   align-items: center;
   padding-top: 10px;
@@ -38,7 +40,7 @@ body {
   position:-webkit-sticky; 
   position:sticky; top:0;
   width: 100%;
-  height: 50px;
+  height: 60px;
   background-color: white;
   display: flex;
   align-items: center;
@@ -62,16 +64,8 @@ body {
   gap: 15px;
 }
 
-.navbar .middle {
-  display: flex;
-  
-  align-items: center;
-  
-  font-size: 9px;
-}
-
 .middle img {
-  width: 100px;
+  width: 250px;
   height: auto;
 }
 
@@ -95,7 +89,7 @@ body {
   height: 50px;
   margin-left: 20px;
   margin-right: 30px;
-  
+
 }
 
 .loggedInContainer .smallBtn:hover {
@@ -136,12 +130,13 @@ body {
 }
 
 .post {
-  width: 36vw;
+  width: 500px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   margin-top: 5vh;
   border: 1px solid lightgray;
+  margin-bottom: 5vh;
 }
 
 .post:hover {
@@ -170,7 +165,7 @@ body {
 .post a {
   text-decoration: none;
   color: #091f43;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .post .body {
@@ -226,7 +221,215 @@ body {
 
 /* End of Post */
 
+/* Homepage */
+
+
+/* End of Homepage */
+
+/* Single Post and Comment */
+
 .postPage {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 10px;
+  padding-bottom: 100px;
+}
+
+#individual {
+  width: 700px; 
+}
+
+.commentTitle {
+  font-weight: bold;
+}
+
+.comment label {
+  color: black;
+  font-size: 13px;
+}
+
+.comment p {
+  color: black;
+  background-color: #dcdcdc;
+  border-radius: 45px;
+  border: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: fit-content;
+  margin-right: 10px;
+}
+
+.deleteBtn {
+  font-family: 'Montserrat';
+  font-size: 10px;
+  border-radius: 50px;
+  border: none;
+  background-color: #d1515a;
+  color: white;
+  width: 120px;
+  height: 30px;
+  margin-left: 150px;
+  margin-bottom: 17px;
+}
+
+.deleteBtn:hover {
+  color: #091f43;
+  cursor: pointer;
+}
+
+.postPage .downSide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -40px;
+  
+}
+
+.postComment .body {
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+
+}
+
+.downSide .commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.addCommentContainer .commentField {
+  font-family: 'Montserrat';
+  width: 28vw;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5vh;
+  border: 1px solid lightgray;
+  padding: 10px;
+}
+
+.downSide button {
+  font-family: 'Montserrat';
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 50px;
+  border: none;
+  background-color: #d1515a;
+  color: white;
+  width: 150px;
+  height: 50px;
+  margin-left: 20px;
+  margin-right: 30px;
+}
+
+.downSide button:hover {
+  color: #091f43;
+  cursor: pointer;
+}
+
+.footer button {
+  font-family: 'Montserrat';
+  font-size: 10px;
+  border-radius: 50px;
+  border: none;
+  background-color: #d1515a;
+  color: white;
+  width: 120px;
+  height: 30px;
+}
+
+.footer button:hover {
+  color: #091f43;
+  cursor: pointer;
+}
+
+/* End of Single Post and Comment */
+
+/* Create Post */
+
+.createPostPage p {
+  color: #091f43;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.inputCreatePost {
+  font-family: 'Montserrat';
+  width: 40vw;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid lightgray;
+  padding: 10px;
+} 
+
+.createPost {
+  
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.sendImg {
+  font-family: 'Montserrat';
+  color:#091f43;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.btnCreatePost {
+  font-family: 'Montserrat';
+  font-weight: bold;
+  font-size: 17px;
+  border-radius: 50px;
+  border: none;
+  background-color: #d1515a;
+  color: white;
+  width: 150px;
+  height: 50px;
+  margin-left: 220px;
+  margin-bottom: 100px;
+}
+
+.btnCreatePost:hover {
+  color: #091f43;
+  cursor: pointer;
+}
+
+/* End of Create Post */
+
+/* Profile */
+
+.accountInfoTitle {
+  margin-top: 50px;
+}
+
+.accountInfo {
+  display: flex;
+  gap: 12px;;
+}
+
+.accountInfo button {
+  font-family: 'Montserrat';
+  font-weight: bold;
+  font-size: 12px;
+  border-radius: 50px;
+  border: none;
+  background-color: #d1515a;
+  color: white;
+  width: 165px;
+  height: 50px;
+  margin-bottom: 100px;
+}
+
+.accountInfo button:hover {
+  color: #091f43;
+  cursor: pointer;
 }
