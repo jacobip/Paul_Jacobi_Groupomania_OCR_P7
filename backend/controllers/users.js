@@ -47,7 +47,7 @@ exports.deleteUser = async (req, res) => {
 				id: userId,
 			},
 		});
-		res.json(`USER NBR ${userId} DELETED SUCCESSFULLY`);
+		res.json(`l'utilisateue ${userId} a été supprimé`);
 	}
 };
 
@@ -57,28 +57,29 @@ exports.login = async (req, res) => {
 	const user = await Users.findOne({ where: { username: username } });
 
 	if (!user) {
-		res.json({ error: "User Doesn't Exist" });
+		res.json({ error: 'Utilisateur non enregistré' });
 	} else {
 		bcrypt.compare(password, user.password).then(async (match) => {
-			if (!match) res.json({ error: 'Wrong Username And Password Combination' });
-
-			const accessToken = sign(
-				{ username: user.username, role: user.role, id: user.id },
-				'importantsecret'
-			);
-			res.json({
-				token: accessToken,
-				username: username,
-				role: user.role,
-				id: user.id,
-			});
+			if (!match) {
+				res.json({ error: 'Wrong Username And Password Combination' });
+			} else {
+				const accessToken = sign(
+					{ username: user.username, role: user.role, id: user.id },
+					'importantsecret'
+				);
+				res.status(200).json({
+					token: accessToken,
+					username: username,
+					role: user.role,
+					id: user.id,
+				});
+			}
 		});
 	}
 };
 
 exports.getUser = (req, res) => {
 	res.json(req.user);
-	console.log(res.json(req.user));
 };
 
 exports.getProfile = async (req, res) => {

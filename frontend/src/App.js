@@ -16,12 +16,11 @@ import Profile from './pages/Profile';
 import ChangePassword from './pages/ChangePassword';
 import UpdatePost from './pages/updatePost';
 import React from 'react';
-import { ReactComponent as ReactLogo } from './logo/icon.svg';
-import logo from './logo/icon-left-font-monochrome-black.png';
-
+import axios from 'axios';
 import { AuthContext } from './helpers/AuthContext';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { ReactComponent as ReactLogo } from './logo/icon.svg';
+import { ReactComponent as FooterLogo } from './logo/icon-left-font-monochrome-white.svg';
 
 function App() {
 	const [authState, setAuthState] = useState({
@@ -75,21 +74,16 @@ function App() {
 								</>
 							) : (
 								<>
-									<Link to="/">
-										<div>Accueil</div>
-									</Link>
-									<Link to="/createpost">Publier un article</Link>
+									<Link to="/">Accueil</Link>
+									<Link to="/createpost">Publier</Link>
 								</>
 							)}
-						</div>
-						<div className="middle">
-							<img src={logo} alt="Logo" />
 						</div>
 						<div className="loggedInContainer">
 							<Link to={`/profile/${authState.id}`}> {authState.username} </Link>
 
 							{authState.status && (
-								<button className="smallBtn" onClick={logout}>
+								<button className="loginbtn" onClick={logout}>
 									Logout
 								</button>
 							)}
@@ -99,13 +93,7 @@ function App() {
 						<Route path="/" element={<Home />} />
 						<Route path="/createpost" element={<CreatePost />} />
 
-						<Route
-							path="/updatepost/:id"
-							exact
-							component={() => {
-								return authState.status ? <UpdatePost /> : <Navigate to="/" />;
-							}}
-						/>
+						<Route path="/updatepost/:id" element={<UpdatePost />} />
 
 						<Route path="/post/:id" element={<Post />} />
 						<Route path="/registration" element={<Registration />} />
@@ -122,7 +110,12 @@ function App() {
 					</Routes>
 				</Router>
 			</AuthContext.Provider>
-			<div className="downBar"></div>
+			<div className="downBar">
+				<FooterLogo className="FooterLogo" />
+				<div>
+					<p>Paul Jacobi OCR</p>
+				</div>
+			</div>
 		</div>
 	);
 }

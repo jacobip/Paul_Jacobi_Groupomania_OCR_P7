@@ -26,7 +26,7 @@ function Post() {
 
 	useEffect(() => {
 		axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
-			console.log(response.data);
+			//console.log(response.data);
 			setPostObject(response.data);
 		});
 		axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
@@ -112,9 +112,9 @@ function Post() {
 							}}
 						>
 							<div>
-								{postObject.image !== null && (
+								{postObject.image !== undefined && (
 									<img
-										className="thumbnail"
+										className="singleThumbnail"
 										src={`http://localhost:3001/${postObject.image}`}
 										alt="img from a post"
 									/>

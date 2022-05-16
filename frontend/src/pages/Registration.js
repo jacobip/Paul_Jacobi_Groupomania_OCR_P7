@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Registration() {
+	let navigate = useNavigate();
+
 	const initialValues = {
 		username: '',
 		password: '',
@@ -23,6 +26,7 @@ function Registration() {
 			.then((res) => {
 				console.log(res);
 				setInfos(res.data.msg);
+				navigate('/login');
 			})
 			.catch((err) => {
 				setInfos(err.response.data.msg);
@@ -36,20 +40,25 @@ function Registration() {
 				onSubmit={onSubmit}
 				validationSchema={validationSchema}
 			>
-				<Form className="formContainer">
-					<label>Username</label>
+				<Form className="changePW">
+					<h1>Enregistrement</h1>
 					<ErrorMessage name="username" component="span" />
-					<Field autoComplete="off" name="username" placeholder="Nom d'utilsateur" />
+					<Field
+						className="password"
+						autoComplete="off"
+						name="username"
+						placeholder="Nom d'utilsateur"
+					/>
 
-					<label>Password</label>
 					<ErrorMessage name="password" component="span" />
 					<Field
+						className="password"
 						autoComplete="off"
 						type="password"
 						name="password"
 						placeholder="Mote de passe Maj Num et Spé"
 					/>
-					<button className="signupButton" type="submit">
+					<button className="btnChangePW" type="submit">
 						SignUp
 					</button>
 				</Form>

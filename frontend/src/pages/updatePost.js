@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
 
 function UpdatePost() {
-	const [image, setImage] = useState('');
 	let { id } = useParams();
+	const [image, setImage] = useState('');
 	const [postObject, setPostObject] = useState({});
 
 	let navigate = useNavigate();
@@ -17,7 +18,7 @@ function UpdatePost() {
 
 	useEffect(() => {
 		axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
-			//console.log(response.data);
+			console.log(response.data);
 			setPostObject(response.data);
 		});
 	}, [id]);
@@ -45,25 +46,18 @@ function UpdatePost() {
 				navigate('/');
 			});
 	};
+
 	return (
 		<div className="createPostPage">
 			<Formik
-				enableReinitialize={true}
 				// initialValues={{
 				//   title: postObject?.title ?? "",
 				//   postText: postObject?.postText ?? "",
 				// }}
 				onSubmit={onSubmit}
-				method="PUT"
-				encType="multipart/form-data"
 				validationSchema={validationSchema}
 			>
-				<Form
-					className="formContainer"
-					method="PUT"
-					action="/postimg"
-					encType="multipart/form-data"
-				>
+				<Form className="formContainer">
 					{postObject.image !== null && (
 						<img
 							className="thumbnail"

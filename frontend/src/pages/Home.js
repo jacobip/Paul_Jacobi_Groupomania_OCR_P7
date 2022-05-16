@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import InsertCommentIcon from '@mui/icons-material/InsertComment';
+import { ReactComponent as MiddleLogo } from '../logo/icon-left-matrix-double.svg';
 
 function Home() {
 	const [listOfPosts, setListOfPosts] = useState([]);
@@ -69,6 +70,7 @@ function Home() {
 	return (
 		<div className="listofposts">
 			<div className="intro">
+				<MiddleLogo className="middle" />
 				<p>Les dernières publications du réseau social Groupomania</p>
 			</div>
 			{listOfPosts.map((value, key) => {
