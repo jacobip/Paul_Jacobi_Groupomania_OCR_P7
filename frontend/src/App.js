@@ -14,7 +14,6 @@ import Login from './pages/Login';
 import PageNotFound from './pages/PageNotFound';
 import Profile from './pages/Profile';
 import ChangePassword from './pages/ChangePassword';
-import UpdatePost from './pages/updatePost';
 import React from 'react';
 import axios from 'axios';
 import { AuthContext } from './helpers/AuthContext';
@@ -55,7 +54,8 @@ function App() {
 	const logout = () => {
 		alert('deconnexion');
 		localStorage.removeItem('accessToken');
-		setAuthState({ username: '', id: 0, role: '', status: false });
+		//setAuthState({ username: '', id: 0, role: '', status: false });
+		window.location.href = 'http://localhost:3000/login';
 	};
 
 	return (
@@ -92,13 +92,9 @@ function App() {
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/createpost" element={<CreatePost />} />
-
-						<Route path="/updatepost/:id" element={<UpdatePost />} />
-
 						<Route path="/post/:id" element={<Post />} />
 						<Route path="/registration" element={<Registration />} />
 						<Route path="/login" element={<Login />} />
-
 						<Route path="/profile/:id" element={<Profile />} />
 
 						{() => {

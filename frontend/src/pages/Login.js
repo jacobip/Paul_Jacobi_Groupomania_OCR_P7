@@ -26,7 +26,6 @@ function Login() {
 					status: true,
 				});
 				setRole(response.data.role);
-
 				navigate('/');
 			}
 		});

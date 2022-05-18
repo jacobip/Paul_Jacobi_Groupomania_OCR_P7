@@ -16,8 +16,8 @@ function Registration() {
 	const [infos, setInfos] = useState('');
 
 	const validationSchema = Yup.object().shape({
-		username: Yup.string().min(3).max(15).required(),
-		password: Yup.string().min(4).max(20).required(),
+		username: Yup.string().min(3).max(50).required(),
+		password: Yup.string().min(4).max(50).required(),
 	});
 
 	const onSubmit = (data) => {
@@ -47,7 +47,7 @@ function Registration() {
 						className="password"
 						autoComplete="off"
 						name="username"
-						placeholder="Nom d'utilsateur"
+						placeholder="Mail Groupomania"
 					/>
 
 					<ErrorMessage name="password" component="span" />
@@ -56,7 +56,7 @@ function Registration() {
 						autoComplete="off"
 						type="password"
 						name="password"
-						placeholder="Mote de passe Maj Num et Spé"
+						placeholder="Mot de passe Majuscule Num et Caractère spécial"
 					/>
 					<button className="btnChangePW" type="submit">
 						SignUp

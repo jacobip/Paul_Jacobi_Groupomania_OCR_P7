@@ -1,8 +1,10 @@
 /*
 Couleurs Groupomania
-#d1515a : Red
+#d1515a : Pink
 #091f43 : Blue
 #dcdcdc : Grey
+#fd2d01: Red
+#ffd7d7 : lightRed
 */
 
 .App {
@@ -102,7 +104,7 @@ body {
 
 .navbar a {
   text-decoration: none;
-  font-size: 2.6vh;
+  font-size: 1rem;
   color: black;
 }
 
@@ -116,8 +118,6 @@ body {
 
 .middle {
   width: 30vw;
-  
-
 }
 
 .listofposts {
@@ -125,7 +125,7 @@ body {
   flex-direction: column;
   justify-content: center;
   gap: 10px;
-  padding-top: 20px;
+  padding-top: 40px;
   width: 100%;
   align-items: center;
 }
@@ -136,12 +136,19 @@ body {
   align-items: center;
 }
 
+.listofposts p {
+  color: #091f43;
+  font-size: 1.4vw;
+  font-weight: 300;
+  padding-top: 3vh;
+}
+
 .post {
   width: 50vw;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  border: 1px solid lightgray;
+  border: 4px solid #091f43;
   margin-bottom: 5vh;
 }
 
@@ -155,7 +162,7 @@ body {
 .post:hover {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   cursor: pointer;
-  border: 1px solid gray;
+  border: 4px solid #d1515a;
 }
 
 
@@ -371,6 +378,14 @@ body {
 
 /* Create Post */
 
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10vh;
+}
+
 .createPostPage p {
   color: #091f43;
   font-size: 20px;
@@ -379,7 +394,7 @@ body {
 
 .inputCreatePost {
   font-family: 'Montserrat';
-  width: 40vw;
+  width: 50vw;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -388,9 +403,9 @@ body {
 } 
 
 .createPost {
-  
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 15px;
   margin-bottom: 25px;
 }
@@ -413,8 +428,6 @@ body {
   color: white;
   width: 150px;
   height: 50px;
-  margin-left: 220px;
-  margin-bottom: 100px;
 }
 
 .btnCreatePost:hover {

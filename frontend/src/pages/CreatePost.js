@@ -80,7 +80,6 @@ function CreatePost() {
 							placeholder="Texte de la publication"
 							name="postText"
 							id=""
-							cols="30"
 							rows="9"
 						></Field>
 						<div className="sendImg">

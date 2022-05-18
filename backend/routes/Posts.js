@@ -11,8 +11,6 @@ router.get('/byId/:id', postsCtrl.getIdPosts);
 
 router.get('/byuserId/:id', postsCtrl.getAllIdPosts);
 
-router.put('/:id', validateToken, upload, postsCtrl.modifyPosts);
-
 router.post('/', validateToken, upload, postsCtrl.createPosts);
 
 router.delete('/:postId', validateToken, postsCtrl.deletePosts);

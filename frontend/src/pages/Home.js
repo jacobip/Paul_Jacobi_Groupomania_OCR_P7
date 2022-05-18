@@ -71,8 +71,8 @@ function Home() {
 		<div className="listofposts">
 			<div className="intro">
 				<MiddleLogo className="middle" />
-				<p>Les dernières publications du réseau social Groupomania</p>
 			</div>
+			<p>Les dernières publications des membres du réseau social Groupomania</p>
 			{listOfPosts.map((value, key) => {
 				return (
 					<div key={key} className="post">

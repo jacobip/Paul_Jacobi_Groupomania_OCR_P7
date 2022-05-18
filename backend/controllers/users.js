@@ -4,23 +4,23 @@ const { sign } = require('jsonwebtoken');
 
 exports.createUser = async (req, res) => {
 	const { username, password, role } = req.body;
-
 	const password_regex =
 		/^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{6,}$/;
 
 	try {
 		if (!username || !password) {
 			return res.status(400).json({ msg: 'Fill the form' });
-		}
-		if (!password_regex.test(password)) {
-			return res.status(400).json({ msg: 'PW not secure 6min alpha digit spec' });
+		} else if (!password_regex.test(password)) {
+			return res.status(400).json({
+				msg: `Le mot de passe doit comporter au moins un chiffre une majuscule et un caractère spécial`,
+			});
 		}
 		const isUsernameExist = await Users.findOne({
 			attributes: ['username'],
 			where: { username: username },
 		});
 		if (isUsernameExist) {
-			return res.status(400).json({ msg: 'user already exist' });
+			return res.status(400).json({ msg: `L'utilsateur est déja enregistré` });
 		}
 		bcrypt.hash(password, 10).then((hash) => {
 			Users.create({
@@ -40,20 +40,19 @@ exports.deleteUser = async (req, res) => {
 	const userExist = await Users.findOne({ where: { id: userId } });
 
 	if (!userExist) {
-		res.json({ error: "User Doesn't Exist" });
+		res.json({ error: `L'utilisateur n'existe pas` });
 	} else {
 		await Users.destroy({
 			where: {
 				id: userId,
 			},
 		});
-		res.json(`l'utilisateue ${userId} a été supprimé`);
+		res.json(`l'utilisateur ${userId} a été supprimé`);
 	}
 };
 
 exports.login = async (req, res) => {
 	const { username, password, role } = req.body;
-
 	const user = await Users.findOne({ where: { username: username } });
 
 	if (!user) {
@@ -61,7 +60,7 @@ exports.login = async (req, res) => {
 	} else {
 		bcrypt.compare(password, user.password).then(async (match) => {
 			if (!match) {
-				res.json({ error: 'Wrong Username And Password Combination' });
+				res.json({ error: `L'utilisateur et le mot de passe ne correspondent pas` });
 			} else {
 				const accessToken = sign(
 					{ username: user.username, role: user.role, id: user.id },
