@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import InsertCommentIcon from '@mui/icons-material/InsertComment';
 import { ReactComponent as MiddleLogo } from '../logo/icon-left-matrix-double.svg';
+import { useMediaQuery } from 'react-responsive';
 
 function Home() {
 	const [listOfPosts, setListOfPosts] = useState([]);
@@ -67,61 +68,127 @@ function Home() {
 			});
 	};
 
+	const isResponsive = useMediaQuery({ query: '(max-width: 768px)' });
+	const isDesktop = useMediaQuery({ query: '(min-width: 769px)' });
+
 	return (
 		<div className="listofposts">
-			<div className="intro">
-				<MiddleLogo className="middle" />
-			</div>
-			<p>Les dernières publications des membres du réseau social Groupomania</p>
+			{isResponsive && (
+				<div className="introResponsive">
+					{isResponsive && <MiddleLogo className="middleResponsive" />}
+					{isDesktop && <MiddleLogo className="middle" />}
+					<p>Les dernières publications des membres du réseau social Groupomania</p>
+				</div>
+			)}
+
+			{isDesktop && (
+				<div className="intro">
+					{isResponsive && <MiddleLogo className="middleResponsive" />}
+					{isDesktop && <MiddleLogo className="middle" />}
+					<p>Les dernières publications des membres du réseau social Groupomania</p>
+				</div>
+			)}
+
 			{listOfPosts.map((value, key) => {
 				return (
 					<div key={key} className="post">
-						<div className="title">
-							<Link to={`/profile/${value.UserId}`}>Publié par {value.username} </Link>
-							{value.title}
-						</div>
-						<div
-							className="body"
-							onClick={() => {
-								navigate(`/post/${value.id}`);
-							}}
-						>
-							<p>{value.postText}</p>
-						</div>
-						<div
-							className="image"
-							onClick={() => {
-								navigate(`/post/${value.id}`);
-							}}
-						>
-							{value.image !== null && (
-								<img
-									className="thumbnail"
-									src={`http://localhost:3001/${value.image}`}
-									alt="img from a post"
-								/>
-							)}
-						</div>
-
-						<div className="footer">
-							<div className="likes">
-								<ThumbUpAltIcon
-									onClick={() => {
-										likeAPost(value.id);
-									}}
-									className={likedPosts.includes(value.id) ? 'unlikeBttn' : 'likeBttn'}
-								/>
-
-								<label> {value.Likes.length}</label>
-							</div>
-							<div className="commIcon">
-								<InsertCommentIcon
+						{isResponsive && (
+							<div className="postResponsive">
+								<div className="title">
+									<Link to={`/profile/${value.UserId}`}>Publié par {value.username} </Link>
+									{value.title}
+								</div>
+								<div
+									className="bodyResponsive"
 									onClick={() => {
 										navigate(`/post/${value.id}`);
 									}}
-								/>
+								>
+									<p>{value.postText}</p>
+								</div>
+								<div
+									className="imageResponsive"
+									onClick={() => {
+										navigate(`/post/${value.id}`);
+									}}
+								>
+									{value.image !== null && (
+										<img
+											className="thumbnailResponsive"
+											src={`http://localhost:3001/${value.image}`}
+											alt="img from a post"
+										/>
+									)}
+								</div>
+								<div className="footer">
+									<div className="likes">
+										<ThumbUpAltIcon
+											onClick={() => {
+												likeAPost(value.id);
+											}}
+											className={likedPosts.includes(value.id) ? 'unlikeBttn' : 'likeBttn'}
+										/>
+										<label> {value.Likes.length}</label>
+									</div>
+									<div className="commIcon">
+										<InsertCommentIcon
+											onClick={() => {
+												navigate(`/post/${value.id}`);
+											}}
+										/>
+									</div>
+								</div>
 							</div>
-						</div>
+						)}
+
+						{isDesktop && (
+							<div className="postDesktop">
+								<div className="title">
+									<Link to={`/profile/${value.UserId}`}>Publié par {value.username} </Link>
+									{value.title}
+								</div>
+								<div
+									className="bodyDesktop"
+									onClick={() => {
+										navigate(`/post/${value.id}`);
+									}}
+								>
+									<p>{value.postText}</p>
+								</div>
+								<div
+									className="image"
+									onClick={() => {
+										navigate(`/post/${value.id}`);
+									}}
+								>
+									{value.image !== null && (
+										<img
+											className="thumbnail"
+											src={`http://localhost:3001/${value.image}`}
+											alt="img from a post"
+										/>
+									)}
+								</div>
+								<div className="footer">
+									<div className="likes">
+										<ThumbUpAltIcon
+											onClick={() => {
+												likeAPost(value.id);
+											}}
+											className={likedPosts.includes(value.id) ? 'unlikeBttn' : 'likeBttn'}
+										/>
+										<label> {value.Likes.length}</label>
+									</div>
+									<div className="commIcon">
+										<InsertCommentIcon
+											onClick={() => {
+												navigate(`/post/${value.id}`);
+											}}
+										/>
+									</div>
+								</div>
+							</div>
+						)}
 					</div>
 				);
 			})}

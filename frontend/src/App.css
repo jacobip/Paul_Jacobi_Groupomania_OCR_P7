@@ -22,21 +22,21 @@ body {
   font-family: 'Montserrat';
   background-color: #dcdcdc;
   margin: 0;
+  height: 100%;
 }
 
 /* Footer */
 
 .downBar {
   width: 100%;
-  height: 4vh;
-  background-color: #091f43;
+  
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  color: white;
+  color: #091f43;
+  margin-top: 25px;
 }
 
 .FooterLogo {
@@ -68,8 +68,31 @@ body {
   padding-bottom: 9px;
 }
 
+.navbarResponsive {
+  position:-webkit-sticky; 
+  position:sticky; 
+  top:0;
+  width: 100%;
+  height: 6vh;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: space-between;
+  padding-top: 9px;
+  padding-bottom: 9px;
+}
+
 .logoNavBar {
   width: 8vh;
+}
+
+.navbarResponsive .logoNavBar {
+  width: 5vh;
+}
+
+.navbarResponsive label {
+  color: red;
 }
 
 .navbar .links {
@@ -79,7 +102,42 @@ body {
   padding-left: 15px;
 }
 
+.navbarResponsive .linksResponsive {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-left: 15px;
+}
+
+.navbar a {
+  text-decoration: none;
+  font-size: 1vw;
+  color: black;
+}
+
+.navbar a:hover {
+  color: #d1515a;
+  cursor: pointer;
+}
+
+.navbarResponsive a {
+  text-decoration: none;
+  font-size: 13px;
+  color: black;
+}
+
+.navbarResponsive a:hover {
+  color: #d1515a;
+}
+
 .navbar .loggedInContainer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-right: 15px;
+}
+
+.navbarResponsive .loggedInContainer {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -98,33 +156,50 @@ body {
   height: 6.3vh;
 }
 
+.navbarResponsive .loginbtn {
+  width: 75px;
+  font-size: 11px;
+}
+
 .loggedInContainer .loginbtn:hover {
   color: #091f43;
+  cursor: pointer;
 }
 
-.navbar a {
-  text-decoration: none;
-  font-size: 1rem;
-  color: black;
+.loggedInContainer .loginbtnPhone {
+  font-family: 'Montserrat';
+  font-weight: bold;
+  font-size: 1vw;
+  border-radius: 50px;
+  border: none;
+  background-color: #d1515a;
+  color: white;
+  width: 6vw;
+  height: 6.3vh;
 }
 
-.navbar a:hover {
-  color: #d1515a;
-}
+
+
+
+
 
 /* End of Navbar */
 
-/* Post */
+/* Post & Home*/
 
 .middle {
   width: 30vw;
+}
+
+.middleResponsive {
+  width: 250px;
 }
 
 .listofposts {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
   padding-top: 40px;
   width: 100%;
   align-items: center;
@@ -134,40 +209,89 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
-.listofposts p {
-  color: #091f43;
-  font-size: 1.4vw;
-  font-weight: 300;
-  padding-top: 3vh;
+.intro p {
+  text-align: center;
+  font-size: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #091f43 
 }
 
-.post {
+.introResponsive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.introResponsive p {
+  text-align: center;
+  font-size: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #091f43 
+}
+
+.post:hover {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  cursor: pointer;
+}
+
+.postResponsive {
+  width: 80vw;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.postDesktop {
   width: 50vw;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  border: 4px solid #091f43;
-  margin-bottom: 5vh;
+  border-radius: 10px;
 }
 
-.thumbnail {
+
+
+.bodyDesktop {
+  background-color: white;
+  font-size: 1.1vw;
+  font-weight: 400;
+  padding-left: 15px;
+}
+
+.image {
+  text-align: center;
+  background-color: white;
+  padding-bottom: 10px;
+}
+
+.image .thumbnail {
   width: 45vw;
   height: auto;
   margin-left: 0;
   margin-right: 0;
 }
 
-.post:hover {
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  cursor: pointer;
-  border: 4px solid #d1515a;
+.imageResponsive {
+  text-align: center;
+  background-color: white;
+  padding-bottom: 10px;
+}
+
+.imageResponsive .thumbnailResponsive {
+  width: 77vw;
+  height: auto;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 
-.post .title {
-  flex: 20%;
+.title {
   background-color: white;
   display: grid;
   place-content: left;
@@ -179,38 +303,48 @@ body {
   font-size: 22px;
   font-weight: 500;
   padding-left: 15px;
-  
 }
 
-.post a {
+.title a {
   text-decoration: none;
   color: #091f43;
   font-size: 15px;
 }
 
-.post .body {
+.title a:hover {
+  color: #d1515a
+}
+
+
+.postDesktop .body {
   flex: 60%;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 28px;
   display: flex;
   flex-direction: column;
   background-color: white;
-  color: #091f43;
+  color: black;
   padding-left: 15px;
   text-overflow: ellipsis;
   overflow-wrap: break-word;
-
+  padding-right: 10px;
 }
 
-.image {
-  text-align: center;
+.postResponsive .bodyResponsive {
+  flex: 60%;
+  font-weight: 400;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
   background-color: white;
-  padding-bottom: 10px;
+  color: black;
+  padding-left: 15px;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  padding-right: 10px;
 }
 
-
-.post .footer {
-  flex: 20%;
+.footer {
   border-top: 1px solid lightgray;
   display: flex;
   flex-direction: row;
@@ -235,145 +369,231 @@ body {
   color: #d1515a;
 }
 
-/* End of Post */
-
-/* Homepage */
-
-
-/* End of Homepage */
+/* End of Post & Home*/
 
 /* Single Post and Comment */
 
-.postPage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 100px;
-  padding-top: 50px;
-}
-
-#individual {
-  display: flex;
-  width: 100%; 
-}
-
-.singleThumbnail {
-  width: 50vw
-}
-
-.listOfComments {
-  
-  padding-right: 10px;
-}
-
-.commentTitle {
-  font-weight: bold;
-}
-
-.comment label {
-  color: black;
-  font-size: 13px;
-}
-
-.comment p {
-  color: black;
-  background-color: #dcdcdc;
-  border-radius: 45px;
-  border: none;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 15px;
-  padding-right: 15px;
-  width: fit-content;
-  margin-right: 10px;
-}
-
-.deleteBtn {
-  font-family: 'Montserrat';
-  font-size: 10px;
-  border-radius: 50px;
-  border: none;
-  background-color: #d1515a;
-  color: white;
-  width: 120px;
-  height: 30px;
-  margin-left: 150px;
-  margin-bottom: 17px;
-}
-
-.deleteBtn:hover {
-  color: #091f43;
-  cursor: pointer;
-}
-
-.postPage .downSide {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: -40px;
-  
-}
-
-.postComment .body {
-  display: flex;
-  flex-direction: row;
-  gap: 18px;
-
-}
-
-.downSide .commentForm {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: flex-end;
-}
-
-.addCommentContainer .commentField {
-  font-family: 'Montserrat';
-  width: 28vw;
+.singlePost {
+  width: 80vw;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  margin-top: 5vh;
-  border: 1px solid lightgray;
-  padding: 10px;
+  
+  border-radius: 10px;
+  margin-top: 25px;
+  background-color: white;
 }
 
-.downSide button {
-  font-family: 'Montserrat';
-  font-weight: bold;
-  font-size: 15px;
-  border-radius: 50px;
-  border: none;
-  background-color: #d1515a;
-  color: white;
-  width: 150px;
-  height: 50px;
-  margin-left: 20px;
-  margin-right: 30px;
+.singleBodyDesktop {
+  font-weight: 400;
+  display: flex;
+  gap: 15px;
+  background-color: white;
+  color: black;
+  padding-left: 15px;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  padding-right: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
-.downSide button:hover {
+.singleTitleResponsive {
+  
+  display: flex;
+  width: 50vw;
   color: #091f43;
-  cursor: pointer;
+  padding-top: 30px;
+  padding-bottom: 15px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  font-size: 22px;
+  font-weight: 500;
+  padding-left: 15px;
 }
 
-.footer button {
+.singleBodyResponsive {
+  display: flex;
+  flex-direction: column;
+}
+
+.singleImageResponsive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+}
+
+.singleThumbnailResponsive {
+  width: 50vw;
+}
+
+.singleBodyResponsive p {
+  text-align: left;
+  font-weight: 400;
+  font-size: 12px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.singleBodyDesktop p {
+  text-align: left;
+  font-size: 1.2vw;
+  width: fit-content;
+}
+
+.singleImage {
+  text-align: left;
+  background-color: white;
+  padding-bottom: 10px;
+}
+
+.singleThumbnail {
+  width: 40vw;
+  height: auto;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.commentSide {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.listOfComments {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.commentSideResponsive {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.listOfCommentsResponsive {
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.commentSideResponsive label {
+  font-size: 12px;
+  font-weight: 400;
+  color: #091f43;
+}
+
+.commentResponsive {
+  display: flex;
+  flex-direction: column;
+}
+
+.commentResponsive button {
+  align-self: flex-end;
+}
+
+.commentResponsive p {
+  background-color: #dcdcdc;
+  border-radius: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.comment button {
+  align-self: center;
+}
+
+.singleFooter {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: #091f43;
+  gap: 15px;
+  padding: 10px;
+  border-top: 1px solid lightgray;
+}
+
+.singleFooter button {
+  font-size: 12px;
+  width: 120px;
+  height: 40px;
+}
+
+.smallBtn {
   font-family: 'Montserrat';
+  font-weight: 400;
   font-size: 10px;
   border-radius: 50px;
   border: none;
   background-color: #d1515a;
   color: white;
-  width: 120px;
+  width: 100px;
   height: 30px;
+
 }
 
-.footer button:hover {
+.smallBtn:hover {
   color: #091f43;
   cursor: pointer;
+  
 }
 
+.commentTitle {
+  color: #091f43;
+  font-weight: 600;
+  border-bottom: 1px solid lightgray;
+}
+
+.comment label {
+  font-size: 12px;
+}
+
+.comment p {
+  background-color: #dcdcdc;
+  width: fit-content;
+  border-radius: 50px;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 1.1vw;
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-top: 1px solid lightgray;
+  padding-top: 15px;
+}
+
+.commentField {
+  background-color: #dcdcdc;
+  border-radius: 10px;
+  border: none;
+  font-family: 'Montserrat';
+  padding: 10px;
+  width: 90%;
+  height: 90px;
+  border-radius: 50px;
+  padding-left: 20px;;
+}
 /* End of Single Post and Comment */
 
 /* Create Post */

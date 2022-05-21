@@ -15,11 +15,12 @@ import PageNotFound from './pages/PageNotFound';
 import Profile from './pages/Profile';
 import ChangePassword from './pages/ChangePassword';
 import React from 'react';
+import { useMediaQuery } from 'react-responsive';
 import axios from 'axios';
 import { AuthContext } from './helpers/AuthContext';
 import { useState, useEffect } from 'react';
 import { ReactComponent as ReactLogo } from './logo/icon.svg';
-import { ReactComponent as FooterLogo } from './logo/icon-left-font-monochrome-white.svg';
+import { ReactComponent as FooterLogo } from './logo/icon-left-matrix-double.svg';
 
 function App() {
 	const [authState, setAuthState] = useState({
@@ -54,41 +55,72 @@ function App() {
 	const logout = () => {
 		alert('deconnexion');
 		localStorage.removeItem('accessToken');
-		//setAuthState({ username: '', id: 0, role: '', status: false });
 		window.location.href = 'http://localhost:3000/login';
 	};
+
+	const isResponsive = useMediaQuery({ query: '(max-width: 768px)' });
+	const isDesktop = useMediaQuery({ query: '(min-width: 769px)' });
 
 	return (
 		<div className="App">
 			<AuthContext.Provider value={{ authState, setAuthState }}>
 				<Router>
-					<div className="navbar">
-						<div className="links">
-							<Link to="/">
-								<ReactLogo className="logoNavBar" />
-							</Link>
-							{!authState.status ? (
-								<>
-									<Link to="/login">Se connecter</Link>
-									<Link to="/registration">S'enregistrer</Link>
-								</>
-							) : (
-								<>
-									<Link to="/">Accueil</Link>
-									<Link to="/createpost">Publier</Link>
-								</>
-							)}
+					{isResponsive && (
+						<div className="navbarResponsive">
+							<div className="linksResponsive">
+								<Link to="/">
+									<ReactLogo className="logoNavBar" />
+								</Link>
+								{!authState.status ? (
+									<>
+										<Link to="/login">Se connecter</Link>
+										<Link to="/registration">S'enregistrer</Link>
+									</>
+								) : (
+									<>
+										<Link to="/createpost">Publier</Link>
+									</>
+								)}
+							</div>
+							<div className="loggedInContainer">
+								<Link to={`/profile/${authState.id}`}> {authState.username} </Link>
+								{authState.status && (
+									<button className="loginbtn" onClick={logout}>
+										Logout
+									</button>
+								)}
+							</div>
 						</div>
-						<div className="loggedInContainer">
-							<Link to={`/profile/${authState.id}`}> {authState.username} </Link>
+					)}
+					{isDesktop && (
+						<div className="navbar">
+							<div className="links">
+								<Link to="/">
+									<ReactLogo className="logoNavBar" />
+								</Link>
+								{!authState.status ? (
+									<>
+										<Link to="/login">Se connecter</Link>
+										<Link to="/registration">S'enregistrer</Link>
+									</>
+								) : (
+									<>
+										<Link to="/">Accueil</Link>
+										<Link to="/createpost">Publier</Link>
+									</>
+								)}
+							</div>
+							<div className="loggedInContainer">
+								<Link to={`/profile/${authState.id}`}> {authState.username} </Link>
+								{authState.status && (
+									<button className="loginbtn" onClick={logout}>
+										Logout
+									</button>
+								)}
+							</div>
+						</div>
+					)}
 
-							{authState.status && (
-								<button className="loginbtn" onClick={logout}>
-									Logout
-								</button>
-							)}
-						</div>
-					</div>
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/createpost" element={<CreatePost />} />

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { AuthContext } from '../helpers/AuthContext';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { useMediaQuery } from 'react-responsive';
 
 const initialValues = {
 	comment: '',
@@ -20,13 +21,11 @@ function Post() {
 	const { authState } = useContext(AuthContext);
 
 	const adminRole = authState.role === 'admin';
-	// console.log(adminRole);
 
 	let navigate = useNavigate();
 
 	useEffect(() => {
 		axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
-			//console.log(response.data);
 			setPostObject(response.data);
 		});
 		axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
@@ -36,9 +35,7 @@ function Post() {
 
 	const addComment = () => {
 		const commentToCheck = newComment.commentText;
-		//console.log(commentToCheck);
 		if (commentToCheck === '') {
-			//console.log("nocomment");
 		} else {
 			axios
 				.post(
@@ -92,26 +89,115 @@ function Post() {
 			});
 	};
 
+	const isResponsive = useMediaQuery({ query: '(max-width: 768px)' });
+	const isDesktop = useMediaQuery({ query: '(min-width: 769px)' });
+
 	return (
 		<Formik
 			initialValues={initialValues}
 			onClick={addComment}
 			validationSchema={validationSchema}
 		>
-			<div className="postPage">
-				<div className="upSide">
-					<div className="post postComment" id="individual">
-						<div className="title">{postObject.title}</div>
-
+			<div className="singlePost">
+				{isResponsive && (
+					<div className="singlePostDesktop">
+						<div className="singleTitleResponsive">{postObject.title}</div>
 						<div
-							className="body"
+							className="singleBodyResponsive"
 							onDoubleClick={() => {
 								if (authState.username === postObject.username || adminRole === true) {
-									navigate(`/updatepost/${id}`);
+									navigate(`/profile/${id}`);
 								}
 							}}
 						>
-							<div>
+							<div className="singleImageResponsive">
+								{postObject.image !== undefined && (
+									<img
+										className="singleThumbnailResponsive"
+										src={`http://localhost:3001/${postObject.image}`}
+										alt="img from a post"
+									/>
+								)}
+								<p> {postObject.postText}</p>
+							</div>
+							<div className="commentSideResponsive">
+								<div className="listOfCommentsResponsive">
+									<p className="commentTitle">Commentaires</p>
+									{comments.map((comment, key) => {
+										return (
+											<div key={key} className="commentResponsive">
+												<label>{comment.username} a commenté</label>
+
+												<p>{comment.commentBody}</p>
+
+												{authState.username === comment.username || adminRole === true ? (
+													<button
+														className="smallBtn"
+														onClick={() => {
+															deleteComment(comment.id);
+														}}
+													>
+														Supprimer le commentaire
+													</button>
+												) : (
+													''
+												)}
+											</div>
+										);
+									})}
+								</div>
+								<div className="commentForm">
+									<Form className="addCommentContainer">
+										<Field
+											className="commentField"
+											as="textarea"
+											name="comment"
+											type="text"
+											placeholder="Commentez ce message..."
+											autoComplete="off"
+											cols="50"
+											rows="6"
+											value={newComment.commentText}
+											onChange={(event) => {
+												setNewComment({ commentText: event.target.value, id: null });
+											}}
+										/>
+									</Form>
+									<button className="smallBtn" type="submit" onClick={addComment}>
+										Commentez
+									</button>
+								</div>
+								<div className="singleFooter">
+									{postObject.username}
+									{authState.username === postObject.username || adminRole === true ? (
+										<button
+											className="smallBtn"
+											onClick={() => {
+												deletePost(postObject.id);
+											}}
+										>
+											Supprimer le message
+										</button>
+									) : (
+										''
+									)}
+								</div>
+							</div>
+						</div>
+					</div>
+				)}
+				{isDesktop && (
+					<div className="singlePostDesktop">
+						<div className="title">{postObject.title}</div>
+						<div
+							className="singleBodyDesktop"
+							onDoubleClick={() => {
+								if (authState.username === postObject.username || adminRole === true) {
+									navigate(`/profile/${id}`);
+								}
+							}}
+						>
+							<div className="singleImage">
 								{postObject.image !== undefined && (
 									<img
 										className="singleThumbnail"
@@ -121,71 +207,72 @@ function Post() {
 								)}
 								<p> {postObject.postText}</p>
 							</div>
-							<div className="listOfComments">
-								<p className="commentTitle">Commentaires</p>
-								{comments.map((comment, key) => {
-									return (
-										<div key={key} className="comment">
-											<label>{comment.username} a commenté</label>
-											<p>{comment.commentBody}</p>
+							<div className="commentSide">
+								<div className="listOfComments">
+									<p className="commentTitle">Commentaires</p>
+									{comments.map((comment, key) => {
+										return (
+											<div key={key} className="comment">
+												<label>{comment.username} a commenté</label>
 
-											{authState.username === comment.username || adminRole === true ? (
-												<button
-													className="deleteBtn"
-													onClick={() => {
-														deleteComment(comment.id);
-													}}
-												>
-													Supprimer mon commentaire
-												</button>
-											) : (
-												''
-											)}
-										</div>
-									);
-								})}
+												<p>{comment.commentBody}</p>
+
+												{authState.username === comment.username || adminRole === true ? (
+													<button
+														className="smallBtn"
+														onClick={() => {
+															deleteComment(comment.id);
+														}}
+													>
+														Supprimer le commentaire
+													</button>
+												) : (
+													''
+												)}
+											</div>
+										);
+									})}
+								</div>
+								<div className="commentForm">
+									<Form className="addCommentContainer">
+										<Field
+											className="commentField"
+											as="textarea"
+											name="comment"
+											type="text"
+											placeholder="Commentez ce message..."
+											autoComplete="off"
+											cols="50"
+											rows="6"
+											value={newComment.commentText}
+											onChange={(event) => {
+												setNewComment({ commentText: event.target.value, id: null });
+											}}
+										/>
+									</Form>
+									<button className="smallBtn" type="submit" onClick={addComment}>
+										Commentez
+									</button>
+								</div>
+								<div className="singleFooter">
+									{postObject.username}
+									{authState.username === postObject.username || adminRole === true ? (
+										<button
+											className="smallBtn"
+											onClick={() => {
+												deletePost(postObject.id);
+											}}
+										>
+											Supprimer le message
+										</button>
+									) : (
+										''
+									)}
+								</div>
 							</div>
 						</div>
-						<div className="footer">
-							{postObject.username}
-							{authState.username === postObject.username || adminRole === true ? (
-								<button
-									className="smallBtn"
-									onClick={() => {
-										deletePost(postObject.id);
-									}}
-								>
-									Supprimer mon message
-								</button>
-							) : (
-								''
-							)}
-						</div>
 					</div>
-				</div>
-				<div className="downSide">
-					<div className="commentForm">
-						<Form className="addCommentContainer">
-							<Field
-								className="commentField"
-								as="textarea"
-								name="comment"
-								type="text"
-								placeholder="Commentez ce message..."
-								autoComplete="off"
-								cols="50"
-								rows="6"
-								value={newComment.commentText}
-								onChange={(event) => {
-									setNewComment({ commentText: event.target.value, id: null });
-								}}
-							/>
-						</Form>
-						<button type="submit" onClick={addComment}>
-							Commentez
-						</button>
-					</div>
-				</div>
+				)}
 			</div>
 		</Formik>
 	);
