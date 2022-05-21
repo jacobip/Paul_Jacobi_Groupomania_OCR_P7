@@ -1,5 +1,15 @@
 const express = require('express');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const xss = require('xss-clean');
+
 const app = express();
+
+app.use(
+	helmet({
+		crossOriginResourcePolicy: false,
+	})
+);
 
 const normalizePort = (val) => {
 	const port = parseInt(val, 10);
@@ -15,7 +25,6 @@ const normalizePort = (val) => {
 
 const port = normalizePort(process.env.PORT || '3001');
 const cors = require('cors');
-//require('dotenv').config();
 
 app.use(logger);
 app.use(express.json());
@@ -23,17 +32,7 @@ app.use(cors());
 
 const db = require('./models');
 
-// Routers
-const postRouter = require('./routes/Posts');
-app.use('/posts', postRouter);
-const commentsRouter = require('./routes/Comments');
-app.use('/comments', commentsRouter);
-const usersRouter = require('./routes/Users');
-app.use('/auth', usersRouter);
-const likesRouter = require('./routes/Likes');
-app.use('/likes', likesRouter);
-app.use('/images', express.static('./images'));
-
+//ORM sequelize
 db.sequelize
 	.sync()
 	.then(() => {
@@ -44,6 +43,26 @@ db.sequelize
 	.catch((err) => {
 		console.log(err);
 	});
+//ORM sequelize
+
+const limiter = rateLimit({
+	windowMs: 60 * 60 * 1000,
+	max: 100,
+	message: 'Too many request from this IP, please try again in an hour',
+});
+
+app.use(xss());
+
+// Routers
+const postRouter = require('./routes/Posts');
+app.use('/posts', postRouter);
+const commentsRouter = require('./routes/Comments');
+app.use('/comments', commentsRouter);
+const usersRouter = require('./routes/Users');
+app.use('/auth', limiter, usersRouter);
+const likesRouter = require('./routes/Likes');
+app.use('/likes', likesRouter);
+app.use('/images', express.static('./images'));
 
 function logger(req, res, next) {
 	console.log('originalUrl : ' + req.originalUrl);
