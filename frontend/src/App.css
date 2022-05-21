@@ -196,6 +196,7 @@ body {
 }
 
 .listofposts {
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -235,6 +236,12 @@ body {
   color: #091f43 
 }
 
+.post {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
 .post:hover {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   cursor: pointer;
@@ -247,21 +254,16 @@ body {
   flex-direction: column;
 }
 
-.postDesktop {
-  width: 50vw;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  border-radius: 10px;
-}
 
 
 
 .bodyDesktop {
+
+  
   background-color: white;
   font-size: 1.1vw;
   font-weight: 400;
-  padding-left: 15px;
+  
 }
 
 .image {
@@ -283,11 +285,9 @@ body {
   padding-bottom: 10px;
 }
 
-.imageResponsive .thumbnailResponsive {
+.thumbnailResponsive {
   width: 77vw;
   height: auto;
-  margin-left: 0;
-  margin-right: 0;
 }
 
 
@@ -316,7 +316,12 @@ body {
 }
 
 
-.postDesktop .body {
+.postDesktop {
+  width: 50vw;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
   flex: 60%;
   font-weight: 400;
   font-size: 28px;
@@ -330,18 +335,17 @@ body {
   padding-right: 10px;
 }
 
-.postResponsive .bodyResponsive {
-  flex: 60%;
+.bodyResponsive {
   font-weight: 400;
   font-size: 16px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-color: white;
   color: black;
-  padding-left: 15px;
   text-overflow: ellipsis;
   overflow-wrap: break-word;
-  padding-right: 10px;
 }
 
 .footer {
@@ -359,6 +363,8 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
   padding-right: 10px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .commIcon:hover {
@@ -368,6 +374,8 @@ body {
 .likes:hover {
   color: #d1515a;
 }
+
+
 
 /* End of Post & Home*/
 
@@ -590,7 +598,7 @@ body {
   font-family: 'Montserrat';
   padding: 10px;
   width: 90%;
-  height: 90px;
+  height: 50px;
   border-radius: 50px;
   padding-left: 20px;;
 }
@@ -659,6 +667,15 @@ body {
 
 /* Profile */
 
+.basicInfo {
+ display: flex;
+ flex-direction: column;
+}
+
+.basicInfo p {
+  font-weight: 500;
+}
+
 .accountInfoTitle {
   margin-top: 50px;
 }
@@ -676,9 +693,8 @@ body {
   border: none;
   background-color: #d1515a;
   color: white;
-  width: 165px;
+  width: 155px;
   height: 50px;
-  margin-bottom: 100px;
 }
 
 .accountInfo button:hover {

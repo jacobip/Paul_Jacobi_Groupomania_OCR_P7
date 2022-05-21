@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import { AuthContext } from '../helpers/AuthContext';
-// import { role } from "./Login";
+import { useMediaQuery } from 'react-responsive';
 
 function Profile() {
 	let { id } = useParams();
-	//alert(id);
 	let navigate = useNavigate();
 	const [username, setUsername] = useState('');
 	const [listOfPosts, setListOfPosts] = useState([]);
@@ -37,12 +37,15 @@ function Profile() {
 			});
 	};
 
+	const isResponsive = useMediaQuery({ query: '(max-width: 768px)' });
+	const isDesktop = useMediaQuery({ query: '(min-width: 769px)' });
+
 	return (
-		<div className="profilePageContainer">
+		<div className="listOfPosts">
 			<div className="basicInfo">
-				<h1 className="accountInfoTitle">Profil</h1>
-				<h5>Utilsateur : {username}</h5>
-				<h5>Role : {profileRole}</h5>
+				<p className="accountInfoTitle">Profil</p>
+				<p>Utilsateur : {username}</p>
+				<p>Role : {profileRole}</p>
 				<div className="accountInfo">
 					{authState.username === username ? (
 						<button
@@ -65,41 +68,78 @@ function Profile() {
 						''
 					)}
 				</div>
+				<p>Toutes les publications de {username}</p>
 			</div>
-			<div className="listOfPosts">
-				{listOfPosts.map((value, key) => {
-					return (
-						<div key={key} className="post">
-							<div className="title"> {value.title} </div>
-							<div
-								className="body"
-								onClick={() => {
-									navigate(`/post/${value.id}`);
-								}}
-							>
-								<div>
-									{value.image ? (
-										<img
-											className="thumbnail"
-											src={`http://localhost:3001/${value.image}`}
-											alt="img from a post"
-										/>
-									) : (
-										''
-									)}
+
+			{listOfPosts.map((value, key) => {
+				return (
+					<div key={key} className="post">
+						{isResponsive && (
+							<div className="postResponsive">
+								<div className="title"> {value.title} </div>
+								<div
+									className="bodyResponsive"
+									onClick={() => {
+										navigate(`/post/${value.id}`);
+									}}
+								>
+									<div className="imageResponsive">
+										{value.image ? (
+											<img
+												className="thumbnailResponsive"
+												src={`http://localhost:3001/${value.image}`}
+												alt="img from a post"
+											/>
+										) : (
+											''
+										)}
+									</div>
+									<p>{value.postText}</p>
 								</div>
-								<p>{value.postText}</p>
-							</div>
-							<div className="footer">
-								<div className="username">{value.username}</div>
-								<div className="buttons">
-									<label> {value.Likes.length}</label>
+								<div className="footer">
+									<div className="username">{value.username}</div>
+									<div className="buttons">
+										<ThumbUpAltIcon />
+										<label> {value.Likes.length}</label>
+									</div>
 								</div>
 							</div>
-						</div>
-					);
-				})}
-			</div>
+						)}
+
+						{isDesktop && (
+							<div className="postDesktop">
+								<div className="title"> {value.title} </div>
+								<div
+									className="bodyDesktop"
+									onClick={() => {
+										navigate(`/post/${value.id}`);
+									}}
+								>
+									<div className="image">
+										{value.image ? (
+											<img
+												className="thumbnail"
+												src={`http://localhost:3001/${value.image}`}
+												alt="img from a post"
+											/>
+										) : (
+											''
+										)}
+									</div>
+									<p>{value.postText}</p>
+								</div>
+								<div className="footer">
+									<div className="username">{value.username}</div>
+									<div className="buttons">
+										<ThumbUpAltIcon />
+										<label> {value.Likes.length}</label>
+									</div>
+								</div>
+							</div>
+						)}
+					</div>
+				);
+			})}
 		</div>
 	);
 }
