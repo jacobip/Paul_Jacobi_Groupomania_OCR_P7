@@ -16,8 +16,19 @@ function Registration() {
 	const [infos, setInfos] = useState('');
 
 	const validationSchema = Yup.object().shape({
-		username: Yup.string().min(3).max(50).required(),
-		password: Yup.string().min(4).max(50).required(),
+		username: Yup.string()
+			.email(`L'email n'est pas valide!`)
+			.required(`Un email est requis`),
+		password: Yup.string()
+			.min(
+				4,
+				`Mot de passe trop court (au moins 4 caractères dont au moins une majuscule, un chiffre et un caractère spécial)`
+			)
+			.max(
+				50,
+				`Mot de passe trop long (au maximum 50 caractères dont au moins une majuscule, un chiffre et un caractère spécial)`
+			)
+			.required(`Un mot de passe est requis`),
 	});
 
 	const onSubmit = (data) => {
@@ -56,7 +67,7 @@ function Registration() {
 						autoComplete="off"
 						type="password"
 						name="password"
-						placeholder="Mot de passe Majuscule Num et Caractère spécial"
+						placeholder="Mot de passe"
 					/>
 					<button className="btnChangePW" type="submit">
 						SignUp

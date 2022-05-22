@@ -1,6 +1,7 @@
 /node_modules
 /images
 
+.env
 .DS_Store
 .env.local
 .env.development.local
