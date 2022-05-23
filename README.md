@@ -16,9 +16,9 @@
 
 1 - Lancer MySQL Workbench.
 
-1 - Exécuter la commande 'npm run start' dans le dossier 'backend' ('ctrl C' pour couper le backend).
+1 - Exécuter la commande 'npm start' dans le dossier 'backend' ('ctrl C' pour couper le backend).
 
-2 - Exécuter la commande 'npm run start' dans le dossier 'frontend' ('ctrl C' pour couper le frontend).
+2 - Exécuter la commande 'npm start' dans le dossier 'frontend' ('ctrl C' pour couper le frontend).
 
 3 - L'application doit se lancer automatiquement dans votre navigateur, dans le cas contraire aller à l'adresse 'http://localhost:3000' dans votre navigateur.
 
