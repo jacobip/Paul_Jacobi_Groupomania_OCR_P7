@@ -8,7 +8,7 @@
 
 3 - Exécuter la commande 'npm install' dans le dossier 'backend'.
 
-4 - Exécuter la commande 'npm install' dans le dossier 'frontend' (ignorer '6 low vulnerabilities').
+4 - Exécuter la commande 'npm install' dans le dossier 'frontend' (ignorer le message '6 low vulnerabilities').
 
 5 - Créer et compléter le fichier .env dans le dossier 'backend' (cf. env.exemple).
 

@@ -86,7 +86,7 @@ function App() {
 								<Link to={`/profile/${authState.id}`}> {authState.username} </Link>
 								{authState.status && (
 									<button className="loginbtn" onClick={logout}>
-										Logout
+										Déconnexion
 									</button>
 								)}
 							</div>
@@ -114,7 +114,7 @@ function App() {
 								<Link to={`/profile/${authState.id}`}> {authState.username} </Link>
 								{authState.status && (
 									<button className="loginbtn" onClick={logout}>
-										Logout
+										Déconnexion
 									</button>
 								)}
 							</div>

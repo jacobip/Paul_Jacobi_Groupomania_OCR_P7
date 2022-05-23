@@ -147,18 +147,19 @@ body {
 .loggedInContainer .loginbtn {
   font-family: 'Montserrat';
   font-weight: bold;
-  font-size: 1vw;
+  font-size: 17px;
   border-radius: 50px;
   border: none;
   background-color: #d1515a;
   color: white;
-  width: 6vw;
+  width: 150px;
   height: 6.3vh;
 }
 
 .navbarResponsive .loginbtn {
-  width: 75px;
-  font-size: 11px;
+  width: 110px;
+  height: 5.2vh;
+  font-size: 12px;
 }
 
 .loggedInContainer .loginbtn:hover {

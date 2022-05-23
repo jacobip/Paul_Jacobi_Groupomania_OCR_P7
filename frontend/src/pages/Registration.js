@@ -70,7 +70,7 @@ function Registration() {
 						placeholder="Mot de passe"
 					/>
 					<button className="btnChangePW" type="submit">
-						SignUp
+						S'enregistrer
 					</button>
 				</Form>
 			</Formik>
