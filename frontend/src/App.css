@@ -29,7 +29,6 @@ body {
 
 .downBar {
   width: 100%;
-  
   background-color: white;
   display: flex;
   align-items: center;
@@ -37,6 +36,8 @@ body {
   gap: 10px;
   color: #091f43;
   margin-top: 25px;
+  position: sticky;
+  bottom: 0;
 }
 
 .FooterLogo {
@@ -708,6 +709,7 @@ body {
   align-items: center;
   margin-top: 50px;
   margin-bottom: 200px;
+  min-height: 90vh;
 }
 
 .password {
