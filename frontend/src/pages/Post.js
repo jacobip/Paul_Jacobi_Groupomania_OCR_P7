@@ -93,188 +93,190 @@ function Post() {
 	const isDesktop = useMediaQuery({ query: '(min-width: 769px)' });
 
 	return (
-		<Formik
-			initialValues={initialValues}
-			onClick={addComment}
-			validationSchema={validationSchema}
-		>
-			<div className="singlePost">
-				{isResponsive && (
-					<div className="singlePostDesktop">
-						<div className="singleTitleResponsive">{postObject.title}</div>
-						<div
-							className="singleBodyResponsive"
-							onDoubleClick={() => {
-								if (authState.username === postObject.username || adminRole === true) {
-									navigate(`/profile/${id}`);
-								}
-							}}
-						>
-							<div className="singleImageResponsive">
-								{postObject.image !== undefined && (
-									<img
-										className="singleThumbnailResponsive"
-										src={`http://localhost:3001/${postObject.image}`}
-										alt="img from a post"
-									/>
-								)}
-								<p> {postObject.postText}</p>
-							</div>
-							<div className="commentSideResponsive">
-								<div className="listOfCommentsResponsive">
-									<p className="commentTitle">Commentaires</p>
-									{comments.map((comment, key) => {
-										return (
-											<div key={key} className="commentResponsive">
-												<label>{comment.username} a commenté</label>
-
-												<p>{comment.commentBody}</p>
-
-												{authState.username === comment.username || adminRole === true ? (
-													<button
-														className="smallBtn"
-														onClick={() => {
-															deleteComment(comment.id);
-														}}
-													>
-														Supprimer le commentaire
-													</button>
-												) : (
-													''
-												)}
-											</div>
-										);
-									})}
-								</div>
-								<div className="commentForm">
-									<Form className="addCommentContainer">
-										<Field
-											className="commentField"
-											as="textarea"
-											name="comment"
-											type="text"
-											placeholder="Commentez ce message..."
-											autoComplete="off"
-											cols="50"
-											rows="6"
-											value={newComment.commentText}
-											onChange={(event) => {
-												setNewComment({ commentText: event.target.value, id: null });
-											}}
+		<div className="singlePostForm">
+			<Formik
+				initialValues={initialValues}
+				onClick={addComment}
+				validationSchema={validationSchema}
+			>
+				<div className="singlePost">
+					{isResponsive && (
+						<div className="singlePostDesktop">
+							<div className="singleTitleResponsive">{postObject.title}</div>
+							<div
+								className="singleBodyResponsive"
+								onDoubleClick={() => {
+									if (authState.username === postObject.username || adminRole === true) {
+										navigate(`/profile/${id}`);
+									}
+								}}
+							>
+								<div className="singleImageResponsive">
+									{postObject.image !== undefined && (
+										<img
+											className="singleThumbnailResponsive"
+											src={`http://localhost:3001/${postObject.image}`}
+											alt="img from a post"
 										/>
-									</Form>
-									<button className="smallBtn" type="submit" onClick={addComment}>
-										Commentez
-									</button>
-								</div>
-								<div className="singleFooter">
-									{postObject.username}
-									{authState.username === postObject.username || adminRole === true ? (
-										<button
-											className="smallBtn"
-											onClick={() => {
-												deletePost(postObject.id);
-											}}
-										>
-											Supprimer le message
-										</button>
-									) : (
-										''
 									)}
+									<p> {postObject.postText}</p>
+								</div>
+								<div className="commentSideResponsive">
+									<div className="listOfCommentsResponsive">
+										<p className="commentTitle">Commentaires</p>
+										{comments.map((comment, key) => {
+											return (
+												<div key={key} className="commentResponsive">
+													<label>{comment.username} a commenté</label>
+
+													<p>{comment.commentBody}</p>
+
+													{authState.username === comment.username || adminRole === true ? (
+														<button
+															className="smallBtn"
+															onClick={() => {
+																deleteComment(comment.id);
+															}}
+														>
+															Supprimer le commentaire
+														</button>
+													) : (
+														''
+													)}
+												</div>
+											);
+										})}
+									</div>
+									<div className="commentForm">
+										<Form className="addCommentContainer">
+											<Field
+												className="commentField"
+												as="textarea"
+												name="comment"
+												type="text"
+												placeholder="Commentez ce message..."
+												autoComplete="off"
+												cols="50"
+												rows="6"
+												value={newComment.commentText}
+												onChange={(event) => {
+													setNewComment({ commentText: event.target.value, id: null });
+												}}
+											/>
+										</Form>
+										<button className="smallBtn" type="submit" onClick={addComment}>
+											Commentez
+										</button>
+									</div>
+									<div className="singleFooter">
+										{postObject.username}
+										{authState.username === postObject.username || adminRole === true ? (
+											<button
+												className="smallBtn"
+												onClick={() => {
+													deletePost(postObject.id);
+												}}
+											>
+												Supprimer le message
+											</button>
+										) : (
+											''
+										)}
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				)}
-				{isDesktop && (
-					<div className="singlePostDesktop">
-						<div className="title">{postObject.title}</div>
-						<div
-							className="singleBodyDesktop"
-							onDoubleClick={() => {
-								if (authState.username === postObject.username || adminRole === true) {
-									navigate(`/profile/${id}`);
-								}
-							}}
-						>
-							<div className="singleImage">
-								{postObject.image !== undefined && (
-									<img
-										className="singleThumbnail"
-										src={`http://localhost:3001/${postObject.image}`}
-										alt="img from a post"
-									/>
-								)}
-								<p> {postObject.postText}</p>
-							</div>
-							<div className="commentSide">
-								<div className="listOfComments">
-									<p className="commentTitle">Commentaires</p>
-									{comments.map((comment, key) => {
-										return (
-											<div key={key} className="comment">
-												<label>{comment.username} a commenté</label>
-
-												<p>{comment.commentBody}</p>
-
-												{authState.username === comment.username || adminRole === true ? (
-													<button
-														className="smallBtn"
-														onClick={() => {
-															deleteComment(comment.id);
-														}}
-													>
-														Supprimer le commentaire
-													</button>
-												) : (
-													''
-												)}
-											</div>
-										);
-									})}
-								</div>
-								<div className="commentForm">
-									<Form className="addCommentContainer">
-										<Field
-											className="commentField"
-											as="textarea"
-											name="comment"
-											type="text"
-											placeholder="Commentez ce message..."
-											autoComplete="off"
-											cols="50"
-											rows="6"
-											value={newComment.commentText}
-											onChange={(event) => {
-												setNewComment({ commentText: event.target.value, id: null });
-											}}
+					)}
+					{isDesktop && (
+						<div className="singlePostDesktop">
+							<div className="title">{postObject.title}</div>
+							<div
+								className="singleBodyDesktop"
+								onDoubleClick={() => {
+									if (authState.username === postObject.username || adminRole === true) {
+										navigate(`/profile/${id}`);
+									}
+								}}
+							>
+								<div className="singleImage">
+									{postObject.image !== undefined && (
+										<img
+											className="singleThumbnail"
+											src={`http://localhost:3001/${postObject.image}`}
+											alt="img from a post"
 										/>
-									</Form>
-									<button className="smallBtn" type="submit" onClick={addComment}>
-										Commentez
-									</button>
-								</div>
-								<div className="singleFooter">
-									{postObject.username}
-									{authState.username === postObject.username || adminRole === true ? (
-										<button
-											className="smallBtn"
-											onClick={() => {
-												deletePost(postObject.id);
-											}}
-										>
-											Supprimer le message
-										</button>
-									) : (
-										''
 									)}
+									<p> {postObject.postText}</p>
+								</div>
+								<div className="commentSide">
+									<div className="listOfComments">
+										<p className="commentTitle">Commentaires</p>
+										{comments.map((comment, key) => {
+											return (
+												<div key={key} className="comment">
+													<label>{comment.username} a commenté</label>
+
+													<p>{comment.commentBody}</p>
+
+													{authState.username === comment.username || adminRole === true ? (
+														<button
+															className="smallBtn"
+															onClick={() => {
+																deleteComment(comment.id);
+															}}
+														>
+															Supprimer le commentaire
+														</button>
+													) : (
+														''
+													)}
+												</div>
+											);
+										})}
+									</div>
+									<div className="commentForm">
+										<Form className="addCommentContainer">
+											<Field
+												className="commentField"
+												as="textarea"
+												name="comment"
+												type="text"
+												placeholder="Commentez ce message..."
+												autoComplete="off"
+												cols="50"
+												rows="6"
+												value={newComment.commentText}
+												onChange={(event) => {
+													setNewComment({ commentText: event.target.value, id: null });
+												}}
+											/>
+										</Form>
+										<button className="smallBtn" type="submit" onClick={addComment}>
+											Commentez
+										</button>
+									</div>
+									<div className="singleFooter">
+										{postObject.username}
+										{authState.username === postObject.username || adminRole === true ? (
+											<button
+												className="smallBtn"
+												onClick={() => {
+													deletePost(postObject.id);
+												}}
+											>
+												Supprimer le message
+											</button>
+										) : (
+											''
+										)}
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				)}
-			</div>
-		</Formik>
+					)}
+				</div>
+			</Formik>
+		</div>
 	);
 }
 

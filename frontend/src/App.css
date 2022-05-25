@@ -192,7 +192,6 @@ body {
 }
 
 .listofposts {
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -263,7 +262,7 @@ body {
 }
 
 .image .thumbnail {
-  width: 30vw;
+  width: 25vw;
   height: auto;
   margin-left: 0;
   margin-right: 0;
@@ -378,6 +377,10 @@ body {
 /* End of Post & Home*/
 
 /* Single Post and Comment */
+
+.singlePostForm {
+  height: 90vh;
+}
 
 .singlePost {
   width: 80vw;
@@ -601,6 +604,10 @@ body {
 /* End of Single Post and Comment */
 
 /* Create Post */
+
+.createPostPage {
+  height: 90vh;
+}
 
 .formContainer {
   display: flex;
